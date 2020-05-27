@@ -11,6 +11,7 @@ gunicorn = "*"
 uvicorn = "*"
 pandas = "*"
 tabulate = "*"
+sqlalchemy = "*"
 
 [requires]
 python_version = "3.8"
