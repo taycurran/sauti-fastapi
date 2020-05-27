@@ -13,7 +13,6 @@ conn = psycopg2.connect(dbname=os.getenv("aws_db_name"),
 curs = conn.cursor()
 curs.close()
 conn.close()
-print("Done")
 # ----------------------------------------------------------------------------
 
 from sqlalchemy import create_engine
@@ -28,3 +27,5 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 # returns a class
 Base = declarative_base()
+
+print("hi")
