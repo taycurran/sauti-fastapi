@@ -3,8 +3,6 @@ from sqlalchemy.orm import relationship
 
 from database import Base
 
-print("Done2")
-
 # TODO: qc_wholesale needs a primary key
 # https://docs.sqlalchemy.org/en/13/faq/ormconfiguration.html#how-do-i-map-a-table-that-has-no-primary-key
 class QC_Wholesale(Base):
