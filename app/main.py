@@ -8,20 +8,38 @@ from pydantic import BaseModel
 from fastapi.responses import HTMLResponse
 # for data handling
 import pandas as pd
+
 # allows main to get modules from various files in current dir
 # from fastapi import APIRouter
-
 # router = APIRouter()
 
 # ----------------------------------------------------------------------------
-# FastAPI is a Python class that provides all the functionality for this API
-# the app variable serves as an "instance" of the class FastAPI
+# --- DB Stuff ---
+from typing import List
+from fastapi import Depends, HTTPException
+from sqlalchemy.orm import Session
+
+import pstgres.models, pstgres.schemas, pstgres.crud
+from pstgres.aws_db import SessionLocal, engine
+from pstgres.models import Base
+
+Base.metadata.create_all(bind=engine)
+# --- -------- ---
+
 app = FastAPI()
 
+# Dependency
+def get_db():
+  db = SessionLocal()
+  try:
+    yield db
+  finally:
+    db.close()
+
+
+
 # CORS - Cross-Origin Resource Sharing
-# refers to the situations when a frontend running in a browser has 
-# JavaScript code that communicates with a backend, 
-# and the backend is in a different "origin" than the frontend
+# Gives Web Team Access to API
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -30,10 +48,7 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-# "path" is the last part of a URL starting from the first /
-# "path" is commonly called an "endpoint" or "route"
-# "operations" refers to one of the HTTP methods
-# The @ indicates a "path operation decorator"
+
 @app.get("/")
 async def root():
   """

@@ -1,7 +1,7 @@
 # allows for declaration of the type of db parameters and 
 # better type checks
 from sqlalchemy.orm import Session
-import models, schemas
+import pstgres.models, pstgres.schemas
 # ----------------------------------------------------------------------------
 def get_market(db: Session, market_name: str):
     return db.query(models.Market).filter\

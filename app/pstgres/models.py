@@ -1,7 +1,7 @@
+# This import does not work... WHYYYYYY?
+from pstgres.aws_db import Base
 from sqlalchemy import Column, ForeignKey, Integer, String, Float, DateTime, Boolean
 from sqlalchemy.orm import relationship
-
-from database import Base
 
 # TODO: qc_wholesale needs a primary key
 # https://docs.sqlalchemy.org/en/13/faq/ormconfiguration.html#how-do-i-map-a-table-that-has-no-primary-key
