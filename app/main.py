@@ -1,5 +1,5 @@
 # to build app
-from fastapi import FastAPI
+from fastapi import FastAPI, File, UploadFile
 # allows web team access to app
 from fastapi.middleware.cors import CORSMiddleware
 # allows you to create a class to structure POST input
@@ -19,22 +19,22 @@ from typing import List
 from fastapi import Depends, HTTPException
 from sqlalchemy.orm import Session
 
-import pstgres.models, pstgres.schemas, pstgres.crud
-from pstgres.aws_db import SessionLocal, engine
-from pstgres.models import Base
+# import pstgres.models, pstgres.schemas, pstgres.crud
+# from pstgres.aws_db import SessionLocal, engine
+# from pstgres.models import Base
 
-Base.metadata.create_all(bind=engine)
+# Base.metadata.create_all(bind=engine)
 # --- -------- ---
 
 app = FastAPI()
 
 # Dependency
-def get_db():
-  db = SessionLocal()
-  try:
-    yield db
-  finally:
-    db.close()
+# def get_db():
+#   db = SessionLocal()
+#   try:
+#     yield db
+#   finally:
+#     db.close()
 
 
 
@@ -60,6 +60,11 @@ async def root():
   <p>Go to <a href="/docs">/docs</a> for documentation.</p>
   """)
 
+@app.get("/qc_wholesale")
+async def qc_wholesale():
+  qc_ws = pd.read_csv("app/qc_wholesale.csv")
+  qc_ws = qc_ws.to_json()
+  return qc_ws
 
 # POST Root Example
 class Story(BaseModel):
