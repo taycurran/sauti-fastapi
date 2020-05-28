@@ -13,7 +13,6 @@ pandas = "*"
 tabulate = "*"
 sqlalchemy = "*"
 python-dotenv = "*"
-psycopg2-binary = "*"
 
 [requires]
-python_version = "3.8"
+python_version = "3.7"
